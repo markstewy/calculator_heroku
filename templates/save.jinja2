@@ -1,0 +1,8 @@
+{% extends 'base.jinja2' %}
+
+{% block subtitle %} Save your progress {% endblock subtitle%}
+
+{% block content %} 
+{# show random code associated with saved totla in the databse #}
+Your saved code is <span id="code"> "return render_template('save.jinja2', code=code)": {{ code }} </span>
+{% endblock content %}
