@@ -80,6 +80,7 @@ app = Flask("myAppName")
 
 # 10) lauch the app on heroku:
     # heroku open
+    # remember there is no / path, so you will get a 404 after openning, you must navigate to /add route in the browser url
 
 app.secret_key = os.environ.get('SECRET_KEY').encode()
 
