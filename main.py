@@ -18,7 +18,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from db.model import SavedTotal
 
 
-app = Flask("myAppName")
+app = Flask(__name__)
 
 # HOST ON HEROKU
 # the secret key saved in the code base is now accessible to anyone with out code, use env variable instead
@@ -32,15 +32,15 @@ app = Flask("myAppName")
 # this will create a heroku app and add a git remote to the repository:
 
 # (venv) markstewart@MacBook-Pro calculator % heroku create
-# Creating app... done, ⬢ dry-castle-43290
-# https://dry-castle-43290.herokuapp.com/ | https://git.heroku.com/dry-castle-43290.git
+# Creating app... done, ⬢ warm-reef-31146
+# https://warm-reef-31146.herokuapp.com/ | https://git.heroku.com/warm-reef-31146.git
 
 # set the environ variable in heroku:
 # generate a key in python console first:
     # python
     # import os
     # os.urandom(24)
-# heroku config:set SECRET_KEY=<my_secret_key> --app dry-castle-43290
+# heroku config:set SECRET_KEY=b'<mysecretkey>' --app warm-reef-31146
 
 # 3) install gunicorn (wsgi server) and pyscopg2 (connect to postgress db)
     # pip install gunicorn psycopg2
@@ -54,23 +54,32 @@ app = Flask("myAppName")
     # 'web: gunicorn main:app'
     # tells heroku to start web server, run gunicorn and point it to the app in main.py
 # 6) local has been using sqlite, heroku uses a postgress db, create a postgress db on heroku:
-    # `heroku addons:create heroku-postgresql:hobby-dev --app dry-castle-43290`     (https://stackoverflow.com/questions/31669067/heroku-postgresql-user-and-database-creation)
+    # `heroku addons:create heroku-postgresql:hobby-dev --app warm-reef-31146`     (https://stackoverflow.com/questions/31669067/heroku-postgresql-user-and-database-creation)
     # output: 
-        # Creating heroku-postgresql:hobby-dev on ⬢ dry-castle-43290... free
+        # Creating heroku-postgresql:hobby-dev on ⬢ warm-reef-31146... free
         # Database has been created and is available
         # ! This database is empty. If upgrading, you can transfer
         # ! data from another database with pg:copy
-        # Created postgresql-sinuous-98800 as DATABASE_URL
+        # Created postgresql-crystalline-73378 as DATABASE_URL
         # Use heroku addons:docs heroku-postgresql to view documentation
-# 7) inspect heroku db and secret key with `heroku config --app dry-castle-43290`:
+# 7) inspect heroku db and secret key with `heroku config --app warm-reef-31146`:
     # output: 
-        # === dry-castle-43290 Config Vars
-        # DATABASE_URL: postgres://kdubbjpwffupre:ba00a14da85499d3cff6540d0e67ed2e8aec3df09fd05f1151e46159bdd95874@ec2-52-72-99-110.compute-1.amazonaws.com:5432/d36bq3tiqu0mgp
-        # SECRET_KEY:   <shows my key here>
+        # === warm-reef-31146 Config Vars
+        # DATABASE_URL: postgres://fkgaiwfvowjpka:0534dd7221ef0de32f8d02d419540b2cbe66303bc3781b5d4a5d4c9c2600e543@ec2-54-161-255-125.compute-1.amazonaws.com:5432/dd42o7j0r9egfh
+        # SECRET_KEY:  <mykey>
 
 # 8) push all this code to heroku:
-    # git remote add heroku https://git.heroku.com/dry-castle-43290.git
+    # if your app is not located in the git repo base dir, you need to create another git repo at the app base dir level
+    # you can then push your sub repo to a new git pository on your github and then use the following commands to set the heroku
+    # remote and push your code to heroku:
+    # git remote add heroku https://git.heroku.com/warm-reef-31146.git
     # git push heroku main
+
+# 9) setup the database on Heroku (dbSetup.py):
+    # `heroku run python /dbSetup.py --app warm-reef-31146`
+
+# 10) lauch the app on heroku:
+    # heroku
 
 app.secret_key = os.environ.get('SECRET_KEY').encode()
 
