@@ -18,7 +18,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from db.model import SavedTotal
 
 
-app = Flask(__name__)
+app = Flask("myAppName")
 
 # HOST ON HEROKU
 # the secret key saved in the code base is now accessible to anyone with out code, use env variable instead
@@ -79,7 +79,7 @@ app = Flask(__name__)
     # `heroku run python /dbSetup.py --app warm-reef-31146`
 
 # 10) lauch the app on heroku:
-    # heroku
+    # heroku open
 
 app.secret_key = os.environ.get('SECRET_KEY').encode()
 
