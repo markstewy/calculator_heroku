@@ -1,5 +1,7 @@
 # Make a virtual environment and install flask:
 
+## NOTICE: THIS APP DOES NOT HAVE A DEFAULT ROUTE, YOU WILL GET AN ERROR UNLESS YOU HIT THE SPECIFIC ROUTES DEFINED IN MAIN.PY
+
 # really good explanation of venv: https://www.youtube.com/watch?v=KxvKCSwlUv8
 
 # 'which python3' get the path to your python3 executable
@@ -53,6 +55,7 @@ app = Flask("myAppName")
     # create Procfile 
     # 'web: gunicorn main:app'
     # tells heroku to start web server, run gunicorn and point it to the app in main.py
+
 # 6) local has been using sqlite, heroku uses a postgress db, create a postgress db on heroku:
     # `heroku addons:create heroku-postgresql:hobby-dev --app warm-reef-31146`     (https://stackoverflow.com/questions/31669067/heroku-postgresql-user-and-database-creation)
     # output: 
@@ -62,6 +65,7 @@ app = Flask("myAppName")
         # ! data from another database with pg:copy
         # Created postgresql-crystalline-73378 as DATABASE_URL
         # Use heroku addons:docs heroku-postgresql to view documentation
+
 # 7) inspect heroku db and secret key with `heroku config --app warm-reef-31146`:
     # output: 
         # === warm-reef-31146 Config Vars
@@ -72,6 +76,7 @@ app = Flask("myAppName")
     # if your app is not located in the git repo base dir, you need to create another git repo at the app base dir level
     # you can then push your sub repo to a new git pository on your github and then use the following commands to set the heroku
     # remote and push your code to heroku:
+    # does venv need to be deactivated? (no)
     # git remote add heroku https://git.heroku.com/warm-reef-31146.git
     # git push heroku main
 
@@ -155,8 +160,6 @@ if __name__ == "__main__":
 # import os
 # os.urandom(24)
 # assign the random key to the app.secret_key, now you can utilize the 'session' map for storing cookies
-
-
 
 # Try it out:
 # go to add route and increment numbers by adding, you will see the session persists across browser refreshes
